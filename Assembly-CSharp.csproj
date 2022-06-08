@@ -53,18 +53,19 @@
     <UnityVersion>2020.3.20f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Game\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Foundation\ObjectPool.cs" />
-    <Compile Include="Assets\Scripts\Foundation\TaskBase\TaskManagerAttachment.cs" />
+    <Compile Include="Assets\Scripts\Foundation\Interface\IObservable.cs" />
     <Compile Include="Assets\Scripts\Foundation\Interface\IObjectPool.cs" />
     <Compile Include="Assets\Scripts\Foundation\TaskBase\TaskManager.cs" />
     <Compile Include="Assets\Scripts\Foundation\Interface\IObserver.cs" />
-    <Compile Include="Assets\Scripts\Foundation\Interface\IObservable.cs" />
-    <Compile Include="Assets\Scripts\Foundation\TaskBase\TaskBase.cs" />
     <Compile Include="Assets\Scripts\Foundation\InputObserver.cs" />
-    <Compile Include="Assets\Scripts\Game\Spawner.cs" />
-    <Compile Include="Assets\Scripts\Game\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Game\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Foundation\TaskBase\TaskBase.cs" />
     <Compile Include="Assets\Scripts\Game\HomingBullet.cs" />
+    <Compile Include="Assets\Scripts\Game\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Foundation\TaskBase\TaskManagerAttachment.cs" />
+    <Compile Include="Assets\Scripts\Game\Spawner.cs" />
+    <Compile Include="Assets\Scripts\Game\HomingBulletResporn.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -642,9 +643,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Cinemachine.csproj">
+      <Project>{A0102E72-7AA5-E6A1-B204-3264388183BF}</Project>
+      <Name>Cinemachine</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{465E42C9-7EB3-E611-E82A-FAF9114E737A}</Project>
       <Name>Unity.VSCode.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{57DF5D5D-6385-7860-67AC-862BBB823A17}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{3A34CACB-2029-D35F-A3F2-20AF2F9601A4}</Project>
@@ -673,14 +682,6 @@
     <ProjectReference Include="Unity.Rider.Editor.csproj">
       <Project>{DE32FFD7-D7D6-E355-2529-0625F8241A89}</Project>
       <Name>Unity.Rider.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
-      <Project>{57DF5D5D-6385-7860-67AC-862BBB823A17}</Project>
-      <Name>com.unity.cinemachine.editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Cinemachine.csproj">
-      <Project>{A0102E72-7AA5-E6A1-B204-3264388183BF}</Project>
-      <Name>Cinemachine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
