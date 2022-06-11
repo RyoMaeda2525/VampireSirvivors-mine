@@ -28,7 +28,7 @@ public class HomingBulletResporn : MonoBehaviour
     /// </summary>
     void Fire()
     {
-        GameObject blt = GameObject.Instantiate(_bullet);
+        GameObject blt = GameObject.Instantiate(_bullet, GameManager.Player.transform);
 
         //¶¬Œã‚É‰ñ“]‚µ‚ÄA‰ñ“]Œã‚ÌŒü‚«‚É2i‚Ü‚¹‚é
         //_rot *= Quaternion.Euler(0 , 0 , Random.Range(0, 360));

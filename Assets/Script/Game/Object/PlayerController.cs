@@ -9,9 +9,9 @@ public class PlayerController: MonoBehaviour
     float _speed = 3;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
+        GameManager.Instance.SetPlayer(this);
     }
 
     // Update is called once per frame
