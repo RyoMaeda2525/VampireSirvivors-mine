@@ -7,7 +7,7 @@ public class HomingBulletResporn : MonoBehaviour
     [SerializeField] GameObject _bullet;        // InstantiateするPrefab
     [SerializeField] float _fireTime = 0.5f;    // Instantiateする感覚
 
-    Quaternion _rot = Quaternion.EulerAngles(0, 0, 0);  //回転値
+    Quaternion _rot = Quaternion.Euler(0, 0, 0);  //回転値
     float timer = 0.0f;                                 //生成タイマー
 
     void Update()
@@ -31,8 +31,8 @@ public class HomingBulletResporn : MonoBehaviour
         GameObject blt = GameObject.Instantiate(_bullet);
 
         //生成後に回転して、回転後の向きに2進ませる
-        _rot *= Quaternion.EulerAngles(Random.Range(0, 360), Random.Range(0, 360), 0);
-        blt.transform.rotation = _rot;
-        blt.transform.position = this.transform.position + _rot * new Vector3(0, 0 , 0);
+        //_rot *= Quaternion.Euler(0 , 0 , Random.Range(0, 360));
+        //blt.transform.rotation = _rot;
+        //blt.transform.position = this.transform.position + _rot * new Vector3(0, 0 , 0);
     }
 }
