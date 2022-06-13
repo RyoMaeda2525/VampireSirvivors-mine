@@ -2,60 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IObjectPool
+public class Exp : MonoBehaviour, IObjectPool
 {
-    [SerializeField] float _speed = 10;
+    [SerializeField, Tooltip("このオブジェクトを拾った時に得る経験値量")]
+    int _getExp = 1;
 
-    ExpManager _expManager = default;
+    SpriteRenderer _image = default;
 
-    SpriteRenderer _image;
-    
-    CircleCollider2D _circleCollider;
+    CircleCollider2D _circleCollider = default;
 
     void Awake()
     {
         _image = GetComponent<SpriteRenderer>();
         _circleCollider = GetComponent<CircleCollider2D>();
-        _expManager = FindObjectOfType<ExpManager>();
         Create();
     }
 
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!IsActive) return;
-
-        Vector3 sub = GameManager.Player.transform.position - transform.position;
-        sub.Normalize();
-
-        transform.position += sub * _speed * Time.deltaTime;
-    }
-
-    public void Damage()
-    {
-        Destroy();
-
-        Debug.Log("Deth");
-
-        //TODO
-        _expManager.GetComponent<ExpManager>().Spawn(this.transform);
+        if (collision.GetComponent<PlayerController>())
+        {
+            GameManager.Instance.GetExperience(_getExp);
+            Destroy();
+        }
     }
 
     //ObjectPool
     bool _isActrive = false;
     public bool IsActive => _isActrive;
+    internal int PickeUp() 
+    {
+        return _getExp;
+    }
+
     public void DisactiveForInstantiate()
     {
         _image.enabled = false;
         _isActrive = false;
         _circleCollider.enabled = false;
     }
-    public void Create()
+    public void Create() 
     {
         _image.enabled = true;
         _isActrive = true;
         _circleCollider.enabled = true;
     }
-    public void Destroy()
+
+    public void Destroy() 
     {
         _image.enabled = false;
         _isActrive = false;

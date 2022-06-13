@@ -15,6 +15,7 @@ public class GameManager
     PlayerController _player = null;
     public void SetPlayer(PlayerController p) { _player = p; }
     List<Enemy> _enemies = new List<Enemy>();
+    List<Exp> _exps = new List<Exp>();
     List<int> _passive = new List<int>();
     SkillSelect _sklSelect = null;
 
@@ -22,6 +23,8 @@ public class GameManager
     {
         //ObjectPool‚ÉˆË‘¶‚µ‚Ä‚¢‚é
         _enemies = GameObject.FindObjectsOfType<Enemy>(true).ToList();
+
+        _exps = GameObject.FindObjectsOfType<Exp>(true).ToList();
 
         _sklSelect = GameObject.FindObjectOfType<SkillSelect>();
     }
@@ -35,15 +38,15 @@ public class GameManager
         {
             _level++;
 
-            if (Time.timeScale > 0.99f)
-            {
-                _sklSelect.SelectStart();
-                Time.timeScale = 0;
-            }
-            else
-            {
-                _stackLevelup++;
-            }
+            //if (Time.timeScale > 0.99f)
+            //{
+            //    _sklSelect.SelectStart();
+            //    Time.timeScale = 0;
+            //}
+            //else
+            //{
+            //    _stackLevelup++;
+            //}
         }
     }
 

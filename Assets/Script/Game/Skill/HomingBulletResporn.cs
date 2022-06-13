@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class HomingBulletResporn : MonoBehaviour
 {
-    [SerializeField] GameObject _bullet;        // InstantiateするPrefab
-    [SerializeField] float _fireTime = 0.5f;    // Instantiateする感覚
+    [SerializeField] HomingBullet _bullet;        
+    [SerializeField] Transform _root = null;
+    [SerializeField] float _fireTime = 0.5f;    // 弾を発射する間隔
 
-    Quaternion _rot = Quaternion.Euler(0, 0, 0);  //回転値
-    float timer = 0.0f;                                 //生成タイマー
+    [SerializeField] int _bulletCount = 100;
+
+    ObjectPool<HomingBullet> _homingBulletPool = new ObjectPool<HomingBullet>();
+
+    float timer = 0.0f;                        //生成タイマー
+
+    private void Awake()
+    {
+        _homingBulletPool.SetBaseObj(_bullet , _root);
+        _homingBulletPool.SetCapacity(_bulletCount);
+    }
 
     void Update()
     {
@@ -28,12 +38,20 @@ public class HomingBulletResporn : MonoBehaviour
     /// </summary>
     void Fire()
     {
-        GameObject blt = GameObject.Instantiate(_bullet, GameManager.Player.transform);
-        blt.GetComponent<HomingBullet>().Create();
+        var script = _homingBulletPool.Instantiate();
 
-        //生成後に回転して、回転後の向きに2進ませる
-        //_rot *= Quaternion.Euler(0 , 0 , Random.Range(0, 360));
-        //blt.transform.rotation = _rot;
-        //blt.transform.position = this.transform.position + _rot * new Vector3(0, 0 , 0);
+        if (script.gameObject.activeSelf)
+            return;
+
+        script.gameObject.SetActive(true);
+
+        /*
+        var go = GameObject.Instantiate(_prefab);
+        var script = go.GetComponent<Enemy>();
+        */
+        if (script)
+        {
+            script.transform.position = GameManager.Player.transform.position;
+        }
     }
 }

@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 0}
-  _speed: 0.075
+  _speed: 0.1
   _hitDistance: 0.3892
   _targetTime: 1.5
   _perforate: 1

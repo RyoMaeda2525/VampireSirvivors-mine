@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
 
     ObjectPool<Enemy> _enemyPool = new ObjectPool<Enemy>();
 
-    private void Start()
+    private void Awake()
     {
         _enemyPool.SetBaseObj(_prefab, _root);
         _enemyPool.SetCapacity(_enemyCount);

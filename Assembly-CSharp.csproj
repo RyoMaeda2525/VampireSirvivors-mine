@@ -71,6 +71,8 @@
     <Compile Include="Assets\Script\Base\Interface\IObjectPool.cs" />
     <Compile Include="Assets\Script\Base\TaskBase\TaskBase.cs" />
     <Compile Include="Assets\Script\Game\Object\PlayerController.cs" />
+    <Compile Include="Assets\Script\Game\Object\Exp.cs" />
+    <Compile Include="Assets\Script\Game\ExpManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomingBullet : MonoBehaviour
+public class HomingBullet : MonoBehaviour , IObjectPool
 {
     enum MoveState
     {
@@ -47,6 +47,7 @@ public class HomingBullet : MonoBehaviour
     {
         _image = GetComponent<SpriteRenderer>();
         _trail = GetComponent<TrailRenderer>();
+        //Create();
     }
     void Start()
     {
@@ -123,7 +124,8 @@ public class HomingBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!IsActive) return;
+        if (!IsActive || collision.gameObject == GameManager.Player.gameObject) return;
+
         if (_enemy && collision.gameObject == _enemy)
         {
             _enemy.GetComponent<Enemy>().Damage();
@@ -143,12 +145,19 @@ public class HomingBullet : MonoBehaviour
                 break;
             }
         }
-        
     }
 
     //ObjectPool
     bool _isActrive = false;
     public bool IsActive => _isActrive;
+
+    public void DisactiveForInstantiate()
+    {
+        _image.enabled = false;
+        _trail.enabled = false;
+        _isActrive = false;
+        this.gameObject.SetActive(false);
+    }
 
     public void Create()
     {
@@ -160,8 +169,11 @@ public class HomingBullet : MonoBehaviour
 
     public void Destroy()
     {
+        _mV = MoveState.FORWARD;
         _image.enabled = false;
         _isActrive = false;
         _trail.enabled = false;
+        this.gameObject.SetActive(false);
     }
 }
+
