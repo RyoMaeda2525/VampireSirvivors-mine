@@ -23,6 +23,9 @@ public class HomingBullet : MonoBehaviour
     [SerializeField , Tooltip("ターゲットするまでの時間")]
     float _targetTime = 3;
 
+    [SerializeField, Tooltip("ターゲットではない敵も貫通時倒せるかどうか")]
+    bool _perforate = false;
+
     Vector3 acceleration = new Vector2();
 
     Vector3 distance = default;
@@ -38,9 +41,12 @@ public class HomingBullet : MonoBehaviour
 
     SpriteRenderer _image;
 
+    TrailRenderer _trail;
+
     void Awake()
     {
         _image = GetComponent<SpriteRenderer>();
+        _trail = GetComponent<TrailRenderer>();
     }
     void Start()
     {
@@ -52,6 +58,8 @@ public class HomingBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsActive) return;
+
         _timer += Time.deltaTime;
 
         if (_enemy && !_enemy.activeSelf)
@@ -105,16 +113,27 @@ public class HomingBullet : MonoBehaviour
                 break;
         }
 
-        if (distance != default && distance.magnitude < vero.magnitude * _hitDistance)
+        //if (distance != default && distance.magnitude < vero.magnitude * _hitDistance)
+        //{
+        //    Debug.Log("Hit");
+        //    _enemy.GetComponent<Enemy>().Damage();
+        //    Destroy();
+        //}
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!IsActive) return;
+        if (_enemy && collision.gameObject == _enemy)
         {
-            Debug.Log("Hit");
             _enemy.GetComponent<Enemy>().Damage();
             Destroy();
         }
+        else if(_perforate) collision.gameObject.GetComponent<Enemy>().Damage();
     }
 
-    private void FindEnemy() 
-    {
+    private void FindEnemy()
+    { 
         List<Enemy> enemys = GameManager.EnemyList;
         while (enemys[0]) 
         {
@@ -136,11 +155,13 @@ public class HomingBullet : MonoBehaviour
         _timer = 0.0f;
         _image.enabled = true;
         _isActrive = true;
+        _trail.enabled = true;
     }
 
     public void Destroy()
     {
         _image.enabled = false;
         _isActrive = false;
+        _trail.enabled = false;
     }
 }

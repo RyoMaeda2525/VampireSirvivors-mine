@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] float _time = 0.05f;
     [SerializeField] Enemy _prefab = null;
     [SerializeField] Transform _root = null;
+    [SerializeField, Tooltip("ƒQ[ƒ€‰æ–Êã‚Ì‰¡²‹——£")] float _horizontalAxis = 40;
 
     [SerializeField] int _enemyCount = 100;
     float _timer = 0.0f;
@@ -38,6 +39,9 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ƒQ[ƒ€‰æ–Êã‚Ì‰¡²‹——£‚ğ”¼Œa‚É‚µ‚Ä‰~ó‚É“G‚ğ¶¬
+    /// </summary>
     void Spawn()
     {
         var script = _enemyPool.Instantiate();
@@ -47,8 +51,8 @@ public class Spawner : MonoBehaviour
         */
         if (script) 
         {
-            _popPos.x = GameManager.Player.transform.position.x + 100 * Mathf.Cos(_cRad);
-            _popPos.y = GameManager.Player.transform.position.y + 100 * Mathf.Sin(_cRad);
+            _popPos.x = GameManager.Player.transform.position.x + _horizontalAxis * Mathf.Cos(_cRad);
+            _popPos.y = GameManager.Player.transform.position.y + _horizontalAxis * Mathf.Sin(_cRad);
             script.transform.position = _popPos;
             _cRad += 0.1f;
         } 
