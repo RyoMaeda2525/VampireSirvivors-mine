@@ -17,9 +17,6 @@ public class HomingBullet : MonoBehaviour , IObjectPool
     [SerializeField]
     float _speed = 3;
 
-    [SerializeField]
-    float _hitDistance = 0.5f;
-
     [SerializeField , Tooltip("ターゲットするまでの時間")]
     float _targetTime = 3;
 
@@ -49,7 +46,7 @@ public class HomingBullet : MonoBehaviour , IObjectPool
         _trail = GetComponent<TrailRenderer>();
         //Create();
     }
-    void Start()
+    void Setup()
     {
         FindEnemy();
         acceleration = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
@@ -63,7 +60,7 @@ public class HomingBullet : MonoBehaviour , IObjectPool
 
         _timer += Time.deltaTime;
 
-        if (_enemy && !_enemy.activeSelf)
+        if (_enemy && !_enemy.GetComponent<Enemy>().IsActive)
         {
             FindEnemy();
         }
@@ -142,9 +139,10 @@ public class HomingBullet : MonoBehaviour , IObjectPool
             if (enemys[Random.Range(0, enemys.Count - 1)].gameObject.activeSelf) 
             {
                 _enemy = enemys[Random.Range(0, enemys.Count - 1)].gameObject;
-                break;
+                return;
             }
         }
+        Destroy();
     }
 
     //ObjectPool
@@ -165,6 +163,7 @@ public class HomingBullet : MonoBehaviour , IObjectPool
         _image.enabled = true;
         _isActrive = true;
         _trail.enabled = true;
+        Setup();
     }
 
     public void Destroy()

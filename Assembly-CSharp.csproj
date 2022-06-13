@@ -60,9 +60,11 @@
     <Compile Include="Assets\Script\Game\GameData.cs" />
     <Compile Include="Assets\Script\Game\Skill\HomingBullet.cs" />
     <Compile Include="Assets\Script\Game\GameManager.cs" />
+    <Compile Include="Assets\Script\Game\ExpManager.cs" />
     <Compile Include="Assets\Script\Base\Interface\IObserver.cs" />
     <Compile Include="Assets\Script\Game\Object\Spawner.cs" />
     <Compile Include="Assets\Script\Game\Ui\SkillSelect.cs" />
+    <Compile Include="Assets\Script\Game\Object\Exp.cs" />
     <Compile Include="Assets\Script\Base\ObjectPool.cs" />
     <Compile Include="Assets\Script\Base\TaskBase\TaskManager.cs" />
     <Compile Include="Assets\Script\Base\Interface\Iobservable.cs" />
@@ -71,8 +73,6 @@
     <Compile Include="Assets\Script\Base\Interface\IObjectPool.cs" />
     <Compile Include="Assets\Script\Base\TaskBase\TaskBase.cs" />
     <Compile Include="Assets\Script\Game\Object\PlayerController.cs" />
-    <Compile Include="Assets\Script\Game\Object\Exp.cs" />
-    <Compile Include="Assets\Script\Game\ExpManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
