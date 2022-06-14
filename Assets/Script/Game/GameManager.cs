@@ -10,7 +10,10 @@ public class GameManager
     private GameManager() { }
 
     int _exp = 0;
+    [Range(1, 6)]
     int _level = 1;
+    int _backLevelExp = 0;
+    int _nextLevelExp = 5;
     int _stackLevelup = 0;
     PlayerController _player = null;
     public void SetPlayer(PlayerController p) { _player = p; }
@@ -36,7 +39,11 @@ public class GameManager
         //level up
         if (GameData.LevelTable.Count > _level && _exp > GameData.LevelTable[_level])
         {
+            _backLevelExp = _nextLevelExp;
+
             _level++;
+
+            _nextLevelExp = GameData.LevelTable[_level];
 
             //if (Time.timeScale > 0.99f)
             //{
@@ -82,5 +89,11 @@ public class GameManager
     static public PlayerController Player => _instance._player;
     static public List<Enemy> EnemyList => _instance._enemies;
     static public int Level => _instance._level;
+
+    static public int Exp => _instance._exp;
+
+    static public int BackLevelExp => _instance._backLevelExp;
+
+    static public int NextLevelExp => _instance._nextLevelExp;
 }
 
