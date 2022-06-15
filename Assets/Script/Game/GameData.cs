@@ -26,9 +26,9 @@ public class GameData
         new SkillSelectTable(){ Type = SelectType.Skill, TargetId = 2, Name = "‹ß‹——£”ÍˆÍ", Level = 0, Probability = 80 },
         new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 1, Name = "UŒ‚UP", Level = 0, Probability = 40 },
         new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 2, Name = "‘¬“xUP", Level = 0, Probability = 20 },
-        new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 3, Name = "UŒ‚‘¬“xUP", Level = 5, Probability = 10 },
+        //new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 3, Name = "UŒ‚‘¬“xUP", Level = 5, Probability = 10 },
         new SkillSelectTable(){ Type = SelectType.Execute, TargetId = 1, Name = "‰ñ•œ", Level = 0, Probability = 90 },
-        new SkillSelectTable(){ Type = SelectType.Execute, TargetId = 2, Name = "ƒS[ƒ‹ƒh", Level = 0, Probability = 40 }
+        //new SkillSelectTable(){ Type = SelectType.Execute, TargetId = 2, Name = "ƒS[ƒ‹ƒh", Level = 0, Probability = 40 }
     };
 
     static public List<int> LevelTable = new List<int>()

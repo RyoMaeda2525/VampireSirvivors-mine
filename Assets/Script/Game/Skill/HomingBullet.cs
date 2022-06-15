@@ -17,6 +17,12 @@ public class HomingBullet : MonoBehaviour , IObjectPool
     [SerializeField]
     float _speed = 3;
 
+    [SerializeField, Tooltip("弾の威力の初期値")]
+    int _attack = 3;
+
+    [Tooltip("弾の威力")]
+    int _attackNow = 3;
+
     [SerializeField , Tooltip("ターゲットするまでの時間")]
     float _targetTime = 3;
 
@@ -122,6 +128,8 @@ public class HomingBullet : MonoBehaviour , IObjectPool
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!IsActive || collision.gameObject == GameManager.Player.gameObject) return;
+
+        _attackNow = _attack + GameManager.Atk;
 
         if (_enemy && collision.gameObject == _enemy)
         {

@@ -16,6 +16,10 @@ public class GameManager
     int _nextLevelExp = 5;
     int _stackLevelup = 0;
 
+    [Tooltip("ステータス")]
+    int _speed = 0;
+    int _atk = 0;
+
     PlayerController _player = null;
     public void SetPlayer(PlayerController p) { _player = p; }
     List<Enemy> _enemies = new List<Enemy>();
@@ -67,7 +71,7 @@ public class GameManager
         switch (table.Type)
         {
             case SelectType.Skill:
-                //_player.AddSkill(table.TargetId);
+                _player.AddSkill(table.TargetId);
                 break;
 
             case SelectType.Passive:
@@ -75,7 +79,7 @@ public class GameManager
                 break;
 
             case SelectType.Execute:
-                //TODO:
+                _player.Heal(99999999); //回復のみなので
                 break;
         }
 
@@ -95,6 +99,18 @@ public class GameManager
         _clear = true;
     }
 
+    public void AddPassive(int PassiveId) 
+    {
+        switch (PassiveId) 
+        {
+            case 0:
+                _speed += 1;
+                break;
+            case 1:
+                _atk += 1;
+                break;
+        }
+    } 
 
     static public PlayerController Player => _instance._player;
     static public List<Enemy> EnemyList => _instance._enemies;
@@ -107,5 +123,9 @@ public class GameManager
     static public int NextLevelExp => _instance._nextLevelExp;
 
     static public bool IsClear => _instance._clear;
+
+    static public int Speed => _instance._speed;
+
+    static public int Atk => _instance._atk;
 }
 

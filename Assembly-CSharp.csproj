@@ -75,6 +75,7 @@
     <Compile Include="Assets\Script\Game\Object\PlayerController.cs" />
     <Compile Include="Assets\Script\Game\TimeManager.cs" />
     <Compile Include="Assets\Script\Game\Object\SceneManagement.cs" />
+    <Compile Include="Assets\Script\Game\Skill\ISkill.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
