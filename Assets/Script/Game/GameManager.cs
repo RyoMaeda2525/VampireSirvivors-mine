@@ -23,6 +23,8 @@ public class GameManager
     List<int> _passive = new List<int>();
     SkillSelect _sklSelect = null;
 
+    bool _clear = false;
+
     public void Setup()
     {
         //ObjectPool‚ÉˆË‘¶‚µ‚Ä‚¢‚é
@@ -88,6 +90,11 @@ public class GameManager
         }
     }
 
+    public void Clear() 
+    {
+        _clear = true;
+    }
+
 
     static public PlayerController Player => _instance._player;
     static public List<Enemy> EnemyList => _instance._enemies;
@@ -98,5 +105,7 @@ public class GameManager
     static public int BackLevelExp => _instance._backLevelExp;
 
     static public int NextLevelExp => _instance._nextLevelExp;
+
+    static public bool IsClear => _instance._clear;
 }
 

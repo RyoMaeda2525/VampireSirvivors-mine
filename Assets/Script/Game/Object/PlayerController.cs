@@ -41,6 +41,7 @@ public class PlayerController: MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Enemy>())
             _hitPointNow -= collision.gameObject.GetComponent<Enemy>().Attack();
+        if (_hitPointNow <= 0) GameManager.Instance.Clear();
     }
 
     public void HitPointGain(float x) 
