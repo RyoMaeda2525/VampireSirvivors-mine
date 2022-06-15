@@ -15,6 +15,7 @@ public class GameManager
     int _backLevelExp = 0;
     int _nextLevelExp = 5;
     int _stackLevelup = 0;
+
     PlayerController _player = null;
     public void SetPlayer(PlayerController p) { _player = p; }
     List<Enemy> _enemies = new List<Enemy>();
@@ -34,6 +35,8 @@ public class GameManager
 
     public void GetExperience(int exp)
     {
+        if (_nextLevelExp == 0) return;
+
         _exp += exp;
 
         //level up

@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour, IObjectPool
 {
     [SerializeField] float _speed = 10;
 
+    [SerializeField] float _atk = 5;
+
     ExpManager _expManager = default;
 
     SpriteRenderer _image;
@@ -38,6 +40,11 @@ public class Enemy : MonoBehaviour, IObjectPool
 
         //TODO
         _expManager.GetComponent<ExpManager>().Spawn(this.transform);
+    }
+
+    public float Attack() 
+    {
+        return _atk;
     }
 
     //ObjectPool

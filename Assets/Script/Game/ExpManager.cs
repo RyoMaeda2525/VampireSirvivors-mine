@@ -12,6 +12,7 @@ public class ExpManager : MonoBehaviour
     Slider _slider = default;
 
     [SerializeField] int _expCount = 100;
+    [SerializeField] Text _text = default;
 
     ObjectPool<Exp> _expPool = new ObjectPool<Exp>();
 
@@ -21,6 +22,7 @@ public class ExpManager : MonoBehaviour
         _expPool.SetBaseObj(_prefab, _root);
         _expPool.SetCapacity(_expCount);
         _slider.GetComponent<Slider>();
+        _text.GetComponent<Text>();
     }
 
     public void Spawn(Transform _popTra)
@@ -43,6 +45,8 @@ public class ExpManager : MonoBehaviour
         _slider.minValue = GameManager.BackLevelExp;
 
         _slider.value = GameManager.Exp;
+
+        _text.text = "Lv" + GameManager.Level.ToString("00");
     }
 
 }

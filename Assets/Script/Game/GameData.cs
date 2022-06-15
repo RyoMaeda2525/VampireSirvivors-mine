@@ -45,5 +45,6 @@ public class GameData
         600,
         700,
         800,
+        0,
     };
 }
