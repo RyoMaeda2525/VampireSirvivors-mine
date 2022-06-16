@@ -49,7 +49,7 @@ public class AreaAttackResporn : ISkill
             }
             _angle = 0;
             _timer = 0;
-            
+            _coolTime = _coolTimefirst + _duration;
         }
     }
 

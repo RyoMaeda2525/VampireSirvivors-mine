@@ -5,8 +5,6 @@ using UnityEngine;
 public class AreaAttack : MonoBehaviour, IObjectPool
 {
 
-    SpriteRenderer _image = default;
-
     Transform _target = default;
 
     private float _rotateSpeed = 180f;
@@ -15,14 +13,19 @@ public class AreaAttack : MonoBehaviour, IObjectPool
 
     private Vector3 _distanceFromTarget = new Vector3(3f, 0, 0); //ターゲットと取る距離
 
-    float _duration = 3; //武器の持続時間
+    float _duration = 4; //武器の持続時間
 
     float _timer = 0;
+
+    [SerializeField, Tooltip("弾の威力の初期値")]
+    int _attack = 3;
+
+    [Tooltip("弾の威力")]
+    int _attackNow = 3;
 
     // Start is called before the first frame update
     void Start()
     {
-        _image = GetComponent<SpriteRenderer>();
         _target = GameManager.Player.gameObject.transform;
     }
 
@@ -42,6 +45,7 @@ public class AreaAttack : MonoBehaviour, IObjectPool
         if (_timer > _duration) 
         {
             Destroy();
+            _timer = 0;
         }
 
         //　ユニットの位置 = ターゲットの位置 ＋ ターゲットから見たユニットの角度 ×　ターゲットからの距離
@@ -52,6 +56,18 @@ public class AreaAttack : MonoBehaviour, IObjectPool
         _angle += _rotateSpeed * Time.deltaTime;
         //　角度を0～360度の間で繰り返す
         _angle = Mathf.Repeat(_angle, 360f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!IsActive || collision.gameObject == GameManager.Player.gameObject) return;
+
+        _attackNow = _attack + GameManager.Atk;
+
+        if (collision.gameObject.GetComponent<Enemy>())
+        {
+            collision.gameObject.GetComponent<Enemy>().Damage();
+        }
     }
 
     //ObjectPool
