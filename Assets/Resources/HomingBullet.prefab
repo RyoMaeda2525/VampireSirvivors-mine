@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8357925702176048090}
   - component: {fileID: -3772173180899538434}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: HomingBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,8 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemy: {fileID: 0}
   _speed: 0.1
+  _attack: 3
   _targetTime: 1.5
-  _perforate: 1
+  _perforate: 0
   vero: {x: 0, y: 0, z: 0}
 --- !u!96 &8357925702176048090
 TrailRenderer:

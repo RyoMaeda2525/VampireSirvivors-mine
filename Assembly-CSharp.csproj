@@ -74,8 +74,10 @@
     <Compile Include="Assets\Script\Base\TaskBase\TaskBase.cs" />
     <Compile Include="Assets\Script\Game\Object\PlayerController.cs" />
     <Compile Include="Assets\Script\Game\TimeManager.cs" />
-    <Compile Include="Assets\Script\Game\Object\SceneManagement.cs" />
+    <Compile Include="Assets\Script\Game\SceneManagement.cs" />
     <Compile Include="Assets\Script\Game\Skill\ISkill.cs" />
+    <Compile Include="Assets\Script\Game\Skill\AreaAttackResporn.cs" />
+    <Compile Include="Assets\Script\Game\Skill\AreaAttack.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

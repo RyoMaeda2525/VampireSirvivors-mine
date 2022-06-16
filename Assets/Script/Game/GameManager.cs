@@ -27,7 +27,11 @@ public class GameManager
     List<int> _passive = new List<int>();
     SkillSelect _sklSelect = null;
 
+    int _initialWeaponNumber = 1;
+    int _survivalEnemy = 0;
+
     bool _clear = false;
+    bool _stop = false;
 
     public void Setup()
     {
@@ -54,15 +58,16 @@ public class GameManager
 
             _nextLevelExp = GameData.LevelTable[_level];
 
-            //if (Time.timeScale > 0.99f)
-            //{
-            //    _sklSelect.SelectStart();
-            //    Time.timeScale = 0;
-            //}
-            //else
-            //{
-            //    _stackLevelup++;
-            //}
+            if (Time.timeScale > 0.99f)
+            {
+                _sklSelect.SelectStart();
+                _stop = true;
+                Time.timeScale = 0;
+            }
+            else
+            {
+                _stackLevelup++;
+            }
         }
     }
 
@@ -91,12 +96,33 @@ public class GameManager
         else
         {
             Time.timeScale = 1;
+            _stop = false;
         }
     }
 
     public void Clear() 
     {
         _clear = true;
+    }
+
+    public void InitialWeaponSet(int x)
+    {
+        _initialWeaponNumber = x;
+    }
+
+    public int InitialWeaponGet() 
+    {
+        return _initialWeaponNumber;
+    }
+
+    public void PopEnemy() 
+    {
+        _survivalEnemy++;
+    }
+
+    public void DownEnemy() 
+    {
+        _survivalEnemy--; 
     }
 
     public void AddPassive(int PassiveId) 
@@ -127,5 +153,9 @@ public class GameManager
     static public int Speed => _instance._speed;
 
     static public int Atk => _instance._atk;
+
+    static public int SurvivalEnemy => _instance._survivalEnemy;
+
+    static public bool Stop => _instance._stop;
 }
 

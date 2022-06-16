@@ -62,7 +62,7 @@ public class HomingBullet : MonoBehaviour , IObjectPool
     // Update is called once per frame
     void Update()
     {
-        if (!IsActive) return;
+        if (!IsActive || GameManager.Stop) return;
 
         _timer += Time.deltaTime;
 
@@ -160,8 +160,8 @@ public class HomingBullet : MonoBehaviour , IObjectPool
     public void DisactiveForInstantiate()
     {
         _image.enabled = false;
-        _trail.enabled = false;
         _isActrive = false;
+        _trail.enabled = false;
         this.gameObject.SetActive(false);
     }
 

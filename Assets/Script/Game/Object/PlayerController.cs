@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +16,13 @@ public class PlayerController: MonoBehaviour
     [SerializeField, Tooltip("PlayerのHpの初期値")]
     float _hitPoint = 100;
 
+    [SerializeField, Tooltip("デバック用の無敵判定")]
+    bool _invincible = false;
+
     [SerializeField]
     Slider _hitPointSlider = default;
+
+    List<ISkill> _skill = new List<ISkill>();
 
     float _hitPointNow = 100;
 
@@ -27,6 +33,7 @@ public class PlayerController: MonoBehaviour
         _hitPointSlider.GetComponent<Slider>();
         _hitPointSlider.maxValue = _hitPoint;
         _hitPointNow = _hitPoint;
+        AddSkill(GameManager.Instance.InitialWeaponGet());
     }
 
     // Update is called once per frame
@@ -37,14 +44,16 @@ public class PlayerController: MonoBehaviour
 
         _speedNow = _speed + GameManager.Speed;
 
-        transform.position += new Vector3( h * _speedNow * Time.deltaTime, v * _speedNow * Time.deltaTime , 0);
+        transform.position += new Vector3(h * _speedNow * Time.deltaTime, v * _speedNow * Time.deltaTime, 0);
 
         _hitPointSlider.value = _hitPointNow;
+
+        _skill.ForEach(s => s.Update());
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<Enemy>())
+        if (!_invincible && collision.gameObject.GetComponent<Enemy>())
             _hitPointNow -= collision.gameObject.GetComponent<Enemy>().Attack();
         if (_hitPointNow <= 0) GameManager.Instance.Clear();
     }
@@ -64,6 +73,30 @@ public class PlayerController: MonoBehaviour
 
     public void AddSkill(int skillId) 
     {
-        
+        var having = _skill.Where(s => s.SkillId == (SkillDef)skillId);
+        if (having.Count() > 0)
+        {
+            having.Single().Levelup();
+        }
+        else
+        {
+            ISkill newSkill = null;
+            switch ((SkillDef)skillId)
+            {
+                case SkillDef.HomingBullet:
+                    newSkill = new HomingBulletResporn();
+                    break;
+
+                case SkillDef.AreaAttackResporn:
+                    newSkill = new AreaAttackResporn();
+                    break;
+            }
+
+            if (newSkill != null)
+            {
+                newSkill.Setup();
+                _skill.Add(newSkill);
+            }
+        }
     }
 }

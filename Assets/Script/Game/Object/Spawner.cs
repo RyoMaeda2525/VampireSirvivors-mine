@@ -12,10 +12,13 @@ public class Spawner : MonoBehaviour
     [SerializeField] Transform _root = null;
     [SerializeField, Tooltip("ÉQÅ[ÉÄâÊñ è„ÇÃâ°é≤ãóó£")] float _horizontalAxis = 40;
 
-    [SerializeField] int _enemyCount = 100;
+    [SerializeField , Tooltip("îzíuÇ∑ÇÈìGÇÃêî")] int _enemyCount = 100;
+    [SerializeField, Tooltip("âÊñ è„Ç…èoÇ∑ìGÇÃç≈ëÂêî")] int _enemySpawnLimit = 5;
     float _timer = 0.0f;
     float _cRad = 0.0f;
     Vector3 _popPos = new Vector3(0, 0, 0);
+
+    int _spawnLimitLevel = 0;
 
     ObjectPool<Enemy> _enemyPool = new ObjectPool<Enemy>();
 
@@ -32,11 +35,21 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer > _time)
+        _cRad += 0.1f;
+        if (GameManager.SurvivalEnemy < _enemySpawnLimit) 
         {
-            Spawn();
-            _timer -= _time;
-        }
+            if (_timer > _time / _enemySpawnLimit)
+            {
+                Spawn();
+                _timer -= _time;
+            }
+        }   
+    }
+
+    public void EnmeyLimitUp() 
+    {
+        _spawnLimitLevel++;
+        _enemySpawnLimit = GameData.SpawnTable[_spawnLimitLevel];
     }
 
     /// <summary>
@@ -54,7 +67,7 @@ public class Spawner : MonoBehaviour
             _popPos.x = GameManager.Player.transform.position.x + _horizontalAxis * Mathf.Cos(_cRad);
             _popPos.y = GameManager.Player.transform.position.y + _horizontalAxis * Mathf.Sin(_cRad);
             script.transform.position = _popPos;
-            _cRad += 0.1f;
+            GameManager.Instance.PopEnemy();
         } 
     }
 }

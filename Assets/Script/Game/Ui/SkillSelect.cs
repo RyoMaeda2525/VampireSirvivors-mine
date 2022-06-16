@@ -7,6 +7,8 @@ public class SkillSelect : MonoBehaviour
 {
     [SerializeField] List<GameObject> _selectList;
 
+    TimeManager _tm = default;
+
     List<SkillSelectTable> _selectTable = new List<SkillSelectTable>();
     List<UnityEngine.UI.Text> _selectText = new List<UnityEngine.UI.Text>();
     CanvasGroup _canvas;
@@ -15,8 +17,9 @@ public class SkillSelect : MonoBehaviour
 
     private void Awake()
     {
+        _tm = GameObject.FindObjectOfType<TimeManager>();
         _canvas = GetComponent<CanvasGroup>();
-        //_canvas.alpha = 0;
+        _tm = GetComponent<TimeManager>();
     }
 
     void Start()

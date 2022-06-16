@@ -13,6 +13,6 @@ interface ISkill
 public enum SkillDef
 {
     Invalid = 0,
-    ShotBullet = 1,
-    AreaAttack = 2,
+    HomingBullet = 1,
+    AreaAttackResporn = 2,
 }

@@ -11,7 +11,9 @@ public class Enemy : MonoBehaviour, IObjectPool
     ExpManager _expManager = default;
 
     SpriteRenderer _image;
-    
+
+    bool _isAttack = false; //ÉvÉåÉCÉÑÅ[ê⁄êGéûÇ…ìÆÇ´Çé~ÇﬂÇÈ
+
     CircleCollider2D _circleCollider;
 
     void Awake()
@@ -24,7 +26,7 @@ public class Enemy : MonoBehaviour, IObjectPool
 
     void Update()
     {
-        if (!IsActive) return;
+        if (!IsActive || _isAttack) return;
 
         Vector3 sub = GameManager.Player.transform.position - transform.position;
         sub.Normalize();
@@ -41,6 +43,16 @@ public class Enemy : MonoBehaviour, IObjectPool
         //TODO
         _expManager.GetComponent<ExpManager>().Spawn(this.transform);
     }
+
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject == GameManager.Player.gameObject) _isAttack = true;
+    //}
+
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject == GameManager.Player.gameObject) _isAttack = false;
+    //}
 
     public float Attack() 
     {
@@ -67,5 +79,6 @@ public class Enemy : MonoBehaviour, IObjectPool
         _image.enabled = false;
         _isActrive = false;
         _circleCollider.enabled = false;
+        GameManager.Instance.DownEnemy();
     }
 }
