@@ -56,7 +56,6 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\Base\TaskBase\TaskManagerAttachment.cs" />
     <Compile Include="Assets\Script\Game\GameData.cs" />
     <Compile Include="Assets\Script\Game\Skill\HomingBullet.cs" />
     <Compile Include="Assets\Script\Game\GameManager.cs" />
@@ -66,12 +65,10 @@
     <Compile Include="Assets\Script\Game\Ui\SkillSelect.cs" />
     <Compile Include="Assets\Script\Game\Object\Exp.cs" />
     <Compile Include="Assets\Script\Base\ObjectPool.cs" />
-    <Compile Include="Assets\Script\Base\TaskBase\TaskManager.cs" />
     <Compile Include="Assets\Script\Base\Interface\Iobservable.cs" />
     <Compile Include="Assets\Script\Game\Object\Enemy.cs" />
     <Compile Include="Assets\Script\Game\Skill\HomingBulletResporn.cs" />
     <Compile Include="Assets\Script\Base\Interface\IObjectPool.cs" />
-    <Compile Include="Assets\Script\Base\TaskBase\TaskBase.cs" />
     <Compile Include="Assets\Script\Game\Object\PlayerController.cs" />
     <Compile Include="Assets\Script\Game\TimeManager.cs" />
     <Compile Include="Assets\Script\Game\SceneManagement.cs" />

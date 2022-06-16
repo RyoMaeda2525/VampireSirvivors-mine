@@ -10,4 +10,9 @@ public class SceneManagement : MonoBehaviour
         if (Time.timeScale == 0) Time.timeScale = 1;
             SceneManager.LoadScene(x);
     }
+
+    public void InitialWeaponSet(int x)
+    {
+        GameManager.Instance.InitialWeaponSet(x);
+    }
 }
